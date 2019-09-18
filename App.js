@@ -9,6 +9,9 @@
 import React, {Fragment} from 'react';
 import Home from './src/screens/containers/home';
 import Header from './src/sections/components/header';
+import SuggestionList from './src/videos/containers/suggestion-list';
+import Api from './utils/api';
+
 import {
   SafeAreaView,
   StyleSheet,
@@ -26,16 +29,34 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const App = () => {
+
+
+/*const App = () => {
   return (
     <Home>
       <Header />
       <Text>buscador</Text>
       <Text>categorías</Text>
-      <Text>sugerencias</Text>
+      <SuggestionList/>
     </Home>
   );
-};
+};*/
+export default class App extends React.PureComponent {
+  async componentDidMount(){
+    const movies = await Api.getSuggestion(2);
+    console.log(movies);
+  }
+  render() {
+  return (
+    <Home>
+      <Header />
+      <Text>buscador</Text>
+      <Text>categorías</Text>
+      <SuggestionList/>
+    </Home>
+  );
+  }
+  }
 
 const styles = StyleSheet.create({
   scrollView: {
@@ -76,4 +97,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+//export default App;
